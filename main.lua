@@ -675,7 +675,7 @@ local function onRankAdded(character)
     local player = Players:GetPlayerFromCharacter(character)
     local head = character:WaitForChild("Head", 5)
 	if not head then return end
-    local localPlayer = player.LocalPlayer
+    local localPlayer = Players.LocalPlayer
 
     local billboardGui = Instance.new("BillboardGui")
     billboardGui.Adornee = head
