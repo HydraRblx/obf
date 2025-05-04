@@ -717,7 +717,7 @@ local function onRankAdded(character)
     if player == localPlayer then
         billboardGui.StudsOffset = Vector3.new(0, 1.5, 0)
     else
-        billboardGui.StudsOffset = Vector3.new(0, 4, 0)
+        billboardGui.StudsOffset = Vector3.new(0, 2.5, 0)
     end
 
     billboardGui.Parent = head
