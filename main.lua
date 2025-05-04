@@ -732,7 +732,7 @@ local function onRankAdded(character)
         textLabel.Visible = true
     end
 
-    billboardGui.StudsOffset = Vector3.new(0, 2.7, 0)
+    billboardGui.StudsOffset = Vector3.new(0, 2, 0)
     billboardGui.Parent = head
 
     -- Visibility logic for other players (within 30 studs and on screen)
