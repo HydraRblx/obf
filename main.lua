@@ -673,9 +673,10 @@ local ranks = {
 
 local function onRankAdded(character)
     local player = Players:GetPlayerFromCharacter(character)
+    if not player then return end
+
     local head = character:WaitForChild("Head", 5)
-	if not head then return end
-    local localPlayer = Players.LocalPlayer
+    if not head then return end
 
     local billboardGui = Instance.new("BillboardGui")
     billboardGui.Adornee = head
@@ -689,25 +690,25 @@ local function onRankAdded(character)
     textLabel.BackgroundTransparency = 1
     textLabel.Visible = true
 
-	local function getRank(userId)
-	    for _, rankInfo in pairs(ranks) do
-	        for _, id in ipairs(rankInfo.ids) do
-	            if id == userId then
-		            if rankInfo.number > 18 then 
-						textLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
-						if isVIP(player.UserId) then
-			                return "[HR] [" .. rankInfo.number .. "] " .. rankInfo.name .. " [VIP]"
-						else
-							return "[HR] [" .. rankInfo.number .. "] " .. rankInfo.name 
-						end
-					else
-						return "[" .. rankInfo.number .. "] " .. rankInfo.name
-					end
-	            end
-	        end
-	    end
-	    return "[0] Player" 
-	end
+    local function getRank(userId)
+        for _, rankInfo in pairs(ranks) do
+            for _, id in ipairs(rankInfo.ids) do
+                if id == userId then
+                    if rankInfo.number > 18 then 
+                        textLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+                        if isVIP(player.UserId) then
+                            return "[HR] [" .. rankInfo.number .. "] " .. rankInfo.name .. " [VIP]"
+                        else
+                            return "[HR] [" .. rankInfo.number .. "] " .. rankInfo.name 
+                        end
+                    else
+                        return "[" .. rankInfo.number .. "] " .. rankInfo.name
+                    end
+                end
+            end
+        end
+        return "[0] Player" 
+    end
 
     local rank = getRank(player.UserId)
     textLabel.Text = rank
@@ -715,16 +716,12 @@ local function onRankAdded(character)
     textLabel.Font = Enum.Font.SourceSansBold
     textLabel.TextSize = 12
 
-    if player == localPlayer then
-        billboardGui.StudsOffset = Vector3.new(0, 1.5, 0)
-    else
-        billboardGui.StudsOffset = Vector3.new(0, 2.7, 0)
-    end
+    billboardGui.StudsOffset = Vector3.new(0, 2.7, 0) -- Default offset for all players
 
     billboardGui.Parent = head
 
-    -- Update billboard visibility
-    updateBillboardGuiVisibility(player, billboardGui, localPlayer)
+    -- Optional: comment this out if it's undefined
+    -- updateBillboardGuiVisibility(player, billboardGui, localPlayer)
 end
 
 local function rankPlayer(player)
