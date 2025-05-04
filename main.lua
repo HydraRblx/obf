@@ -784,7 +784,7 @@ local function onRankAdded(character)
 
     -- Set the correct StudsOffset for the local player and other players
     if player == rankLocalPlayer then
-        billboardGui.StudsOffset = Vector3.new(0, 1.5, 0)  -- Local player's offset
+        billboardGui.StudsOffset = Vector3.new(0, 1, 0)  -- Local player's offset
     else
         billboardGui.StudsOffset = Vector3.new(0, 2.7, 0)  -- Other player's offset
     end
@@ -800,8 +800,8 @@ local function onRankAdded(character)
         local camera = workspace.CurrentCamera
         local headPos, onScreen = camera:WorldToViewportPoint(head.Position)
 
-        -- Show the rank if player is within 30 studs and the head is on screen
-        textLabel.Visible = (distance <= 30 and onScreen) or player == rankLocalPlayer
+        -- Show the rank if player is within 25 studs and the head is on screen
+        textLabel.Visible = (distance <= 25 and onScreen) or player == rankLocalPlayer
     end)
 end
 
