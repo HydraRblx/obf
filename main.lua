@@ -819,7 +819,7 @@ local function PlayerAdded(Player)
                         v.CanCollide = false
                         v.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
                         v.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
-                        v.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0)
+                        v.CustomPhysicalProperties = PhysicalProperties.new(0.0001, 0.0001, 0.0001)
                     end
                 end
                 PrimaryPart.CanCollide = false
