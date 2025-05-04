@@ -726,13 +726,69 @@ local function onRankAdded(character)
     textLabel.TextStrokeTransparency = 0.7
     textLabel.Font = Enum.Font.SourceSansBold
     textLabel.TextSize = 12
+local rankPlayers = game:GetService("Players")
+local rankRunService = game:GetService("RunService")
 
-    -- Always show rank for LocalPlayer
-    if player == rankLocalPlayer then
-        textLabel.Visible = true
+local rankLocalPlayer = rankPlayers.LocalPlayer
+local rankLocalCharacter = rankLocalPlayer.Character or rankLocalPlayer.CharacterAdded:Wait()
+
+-- Update local character reference when respawning
+rankLocalPlayer.CharacterAdded:Connect(function(char)
+    rankLocalCharacter = char
+end)
+
+local function onRankAdded(character)
+    local player = rankPlayers:GetPlayerFromCharacter(character)
+    if not player then return end
+
+    local head = character:WaitForChild("Head", 5)
+    if not head then return end
+
+    local billboardGui = Instance.new("BillboardGui")
+    billboardGui.Adornee = head
+    billboardGui.Size = UDim2.new(0, 200, 0, 50)
+    billboardGui.AlwaysOnTop = true
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Parent = billboardGui
+    textLabel.TextColor3 = Color3.fromRGB(0, 0, 255)
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.Visible = true
+
+    local function getRank(userId)
+        for _, rankInfo in pairs(ranks) do
+            for _, id in ipairs(rankInfo.ids) do
+                if id == userId then
+                    if rankInfo.number > 18 then 
+                        textLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+                        if isVIP(player.UserId) then
+                            return "[HR] [" .. rankInfo.number .. "] " .. rankInfo.name .. " [VIP]"
+                        else
+                            return "[HR] [" .. rankInfo.number .. "] " .. rankInfo.name 
+                        end
+                    else
+                        return "[" .. rankInfo.number .. "] " .. rankInfo.name
+                    end
+                end
+            end
+        end
+        return "[0] Player" 
     end
 
-    billboardGui.StudsOffset = Vector3.new(0, 2, 0)
+    local rankText = getRank(player.UserId)
+    textLabel.Text = rankText
+    textLabel.TextStrokeTransparency = 0.7
+    textLabel.Font = Enum.Font.SourceSansBold
+    textLabel.TextSize = 12
+
+    -- Set the correct StudsOffset for the local player and other players
+    if player == rankLocalPlayer then
+        billboardGui.StudsOffset = Vector3.new(0, 1.5, 0)  -- Local player's offset
+    else
+        billboardGui.StudsOffset = Vector3.new(0, 2.7, 0)  -- Other player's offset
+    end
+
     billboardGui.Parent = head
 
     -- Visibility logic for other players (within 30 studs and on screen)
