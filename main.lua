@@ -727,10 +727,15 @@ local function onRankAdded(character)
     textLabel.Font = Enum.Font.SourceSansBold
     textLabel.TextSize = 12
 
+    -- Always show rank for LocalPlayer
+    if player == rankLocalPlayer then
+        textLabel.Visible = true
+    end
+
     billboardGui.StudsOffset = Vector3.new(0, 2.7, 0)
     billboardGui.Parent = head
 
-    -- Visibility logic
+    -- Visibility logic for other players (within 30 studs and on screen)
     rankRunService.RenderStepped:Connect(function()
         if not rankLocalCharacter or not rankLocalCharacter:FindFirstChild("HumanoidRootPart") then return end
         if not character or not character:FindFirstChild("HumanoidRootPart") then return end
@@ -739,6 +744,7 @@ local function onRankAdded(character)
         local camera = workspace.CurrentCamera
         local headPos, onScreen = camera:WorldToViewportPoint(head.Position)
 
+        -- Show the rank if player is within 30 studs and the head is on screen
         textLabel.Visible = (distance <= 30 and onScreen) or player == rankLocalPlayer
     end)
 end
