@@ -670,6 +670,9 @@ local ranks = {
     {name = "Lead Alpha II", number = 19, ids = {0, 0}},
     {name = "Lead Alpha I", number = 20, ids = {7071101941, 3446191625}}
 }
+
+local localPlayer = Players.LocalPlayer
+
 local function onRankAdded(character)
     local player = Players:GetPlayerFromCharacter(character)
     if not player or player == localPlayer then return end
