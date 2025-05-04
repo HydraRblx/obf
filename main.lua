@@ -727,25 +727,28 @@ local function onRankAdded(character)
     textLabel.Font = Enum.Font.SourceSansBold
     textLabel.TextSize = 12
 
-    -- Set the correct StudsOffset for the local player and other players
+    -- Set different offset for local player and others
     if player == rankLocalPlayer then
-        billboardGui.StudsOffset = Vector3.new(0, 1, 0)  -- Local player's offset
+        billboardGui.StudsOffset = Vector3.new(0, 1.5, 0)
     else
-        billboardGui.StudsOffset = Vector3.new(0, 2.7, 0)  -- Other player's offset
+        billboardGui.StudsOffset = Vector3.new(0, 2.7, 0)
     end
 
     billboardGui.Parent = head
 
-    -- Visibility logic for other players (within 30 studs and on screen)
+    -- Visibility logic
     rankRunService.RenderStepped:Connect(function()
-        if not rankLocalCharacter or not rankLocalCharacter:FindFirstChild("HumanoidRootPart") then return end
+        if not rankLocalPlayer or not rankLocalCharacter then return end
         if not character or not character:FindFirstChild("HumanoidRootPart") then return end
 
-        local distance = (rankLocalCharacter.HumanoidRootPart.Position - character.HumanoidRootPart.Position).Magnitude
-        local camera = workspace.CurrentCamera
-        local headPos, onScreen = camera:WorldToViewportPoint(head.Position)
+        local localHRP = rankLocalCharacter:FindFirstChild("HumanoidRootPart")
+        local targetHRP = character:FindFirstChild("HumanoidRootPart")
+        if not localHRP or not targetHRP then return end
 
-        -- Show the rank if player is within 25 studs and the head is on screen
+        local distance = (localHRP.Position - targetHRP.Position).Magnitude
+        local camera = workspace.CurrentCamera
+        local _, onScreen = camera:WorldToViewportPoint(head.Position)
+
         textLabel.Visible = (distance <= 25 and onScreen) or player == rankLocalPlayer
     end)
 end
