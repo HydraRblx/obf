@@ -1302,7 +1302,7 @@ fling.MouseButton1Click:Connect(function()
             if m2 == 0 then
                 BAV.AngularVelocity = Vector3.new(math.huge, math.huge, math.huge)
             elseif m2 == 1 then
-                BAV.AngularVelocity = Vector3.new(vln, vln, vln)
+                BAV.AngularVelocity = Vector3.new(vln*vln, vln*vln, vln*vln)
             elseif m2 == 2 then
                 BAV.AngularVelocity = Vector3.new(69420420, 69420420, 69420420)
             elseif m2 == 3 then
