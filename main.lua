@@ -644,32 +644,32 @@ end
 
 -- RANK START
 local ranks = {
-    {name = "Alpha Tango", number = 01, ids = {3446191625}},
-    {name = "Bravo Delta", number = 02, ids = {7071101941, 0, 0}},
-    {name = "Charlie Echo", number = 03, ids = {0, 0, 0}},
+    {name = "Victor Hotel", number = 1, ids = {0, 0}},
+    {name = "Tango Zulu", number = 2, ids = {0, 0}},
+    {name = "Sierra Victor", number = 3, ids = {0, 0, 0}},
+    {name = "Romeo Tango", number = 4, ids = {0, 0, 0}},
     
-    {name = "Delta Lima", number = 04, ids = {0, 0, 0}},
-    {name = "Echo Sierra", number = 05, ids = {0, 0, 0}},
+    {name = "Quebec Romeo", number = 5, ids = {0, 0, 0}},
+    {name = "Papa Lima", number = 6, ids = {0, 0, 0}},
+    {name = "Oscar Golf", number = 7, ids = {0, 0, 0}},
+    {name = "November Papa", number = 8, ids = {0, 0, 0}},
     
-    {name = "Foxtrot November", number = 06, ids = {0, 0, 0}},
-    {name = "Golf Hotel", number = 07, ids = {0, 0, 0}},
-    {name = "Hotel Romeo", number = 08, ids = {0, 0, 0}},
-    {name = "Juliet Bravo", number = 09, ids = {0, 0, 0}},
+    {name = "Mike Yankee", number = 9, ids = {0, 0, 0}},
+    {name = "Lima Quebec", number = 10, ids = {0, 0, 0}},
+    {name = "Kilo Victor", number = 11, ids = {0, 0, 0}},
+    {name = "Juliet Bravo", number = 12, ids = {0, 0, 0}},
     
-    {name = "Kilo Victor", number = 10, ids = {0, 0, 0}},
-    {name = "Lima Quebec", number = 11, ids = {0, 0, 0}},
-    {name = "Mike Yankee", number = 12, ids = {0, 0, 0}},
-    {name = "November Papa", number = 13, ids = {0, 0, 0}},
+    {name = "Hotel Romeo", number = 13, ids = {0, 0, 0}},
+    {name = "Golf Hotel", number = 14, ids = {0, 0, 0}},
+    {name = "Foxtrot November", number = 15, ids = {0, 0, 0}},
+    {name = "Echo Sierra", number = 16, ids = {0, 0, 0}},
     
-    {name = "Oscar Golf", number = 14, ids = {0, 0, 0}},
-    {name = "Papa Lima", number = 15, ids = {0, 0, 0}},
-    {name = "Quebec Romeo", number = 16, ids = {0, 0, 0}},
-    {name = "Romeo Tango", number = 17, ids = {0, 0, 0}},
-    
-    {name = "Sierra Victor", number = 18, ids = {0, 0, 0}},
-    {name = "Tango Zulu", number = 19, ids = {0, 0}},
-    {name = "Victor Hotel", number = 20, ids = {0, 0}}
+    {name = "Delta Lima", number = 17, ids = {0, 0, 0}},
+    {name = "Charlie Echo", number = 18, ids = {0, 0, 0}},
+    {name = "Bravo Delta", number = 19, ids = {7071101941, 0, 0}},
+    {name = "Alpha Tango", number = 20, ids = {3446191625}}
 }
+
 
 
 local rankPlayers = game:GetService("Players")
