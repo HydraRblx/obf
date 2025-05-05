@@ -644,32 +644,33 @@ end
 
 -- RANK START
 local ranks = {
-    {name = "Foxtrot III", number = 1, ids = {2345, 6789, 1122}},
-    {name = "Foxtrot II", number = 2, ids = {3456, 7890, 3344}},
-    {name = "Lead Foxtrot I", number = 3, ids = {4567, 8901, 5566}},
+    {name = "Alpha Tango", number = 01, ids = {3446191625}},
+    {name = "Bravo Delta", number = 02, ids = {7071101941, 0, 0}},
+    {name = "Charlie Echo", number = 03, ids = {0, 0, 0}},
     
-    {name = "Echo II", number = 4, ids = {5678, 9012, 7788}},
-    {name = "Echo I", number = 5, ids = {6789, 1011, 9900}},
+    {name = "Delta Lima", number = 04, ids = {0, 0, 0}},
+    {name = "Echo Sierra", number = 05, ids = {0, 0, 0}},
     
-    {name = "Delta VI", number = 6, ids = {7890, 1122, 3344}},
-    {name = "Delta III", number = 7, ids = {8901, 2233, 5566}},
-    {name = "Lead Delta II", number = 8, ids = {9012, 3344, 7788}},
-    {name = "Lead Delta I", number = 9, ids = {1011, 4455, 9900}},
+    {name = "Foxtrot November", number = 06, ids = {0, 0, 0}},
+    {name = "Golf Hotel", number = 07, ids = {0, 0, 0}},
+    {name = "Hotel Romeo", number = 08, ids = {0, 0, 0}},
+    {name = "Juliet Bravo", number = 09, ids = {0, 0, 0}},
     
-    {name = "Charlie VI", number = 10, ids = {3344, 7788, 5566}},
-    {name = "Charlie III", number = 11, ids = {4455, 8899, 7788}},
-    {name = "Lead Charlie II", number = 12, ids = {5566, 9900, 9900}},
-    {name = "Lead Charlie I", number = 13, ids = {6677, 1011, 1011}},
+    {name = "Kilo Victor", number = 10, ids = {0, 0, 0}},
+    {name = "Lima Quebec", number = 11, ids = {0, 0, 0}},
+    {name = "Mike Yankee", number = 12, ids = {0, 0, 0}},
+    {name = "November Papa", number = 13, ids = {0, 0, 0}},
     
-    {name = "Bravo VI", number = 14, ids = {7788, 1122, 1122}},
-    {name = "Bravo III", number = 15, ids = {8899, 2233, 2233}},
-    {name = "Lead Bravo II", number = 16, ids = {9900, 3344, 3344}},
-    {name = "Lead Bravo I", number = 17, ids = {1011, 4455, 4455}},
+    {name = "Oscar Golf", number = 14, ids = {0, 0, 0}},
+    {name = "Papa Lima", number = 15, ids = {0, 0, 0}},
+    {name = "Quebec Romeo", number = 16, ids = {0, 0, 0}},
+    {name = "Romeo Tango", number = 17, ids = {0, 0, 0}},
     
-    {name = "Lead Alpha III", number = 18, ids = {1122, 5566, 5566}},
-    {name = "Lead Alpha II", number = 19, ids = {0, 0}},
-    {name = "Lead Alpha I", number = 20, ids = {7071101941, 3446191625}}
+    {name = "Sierra Victor", number = 18, ids = {0, 0, 0}},
+    {name = "Tango Zulu", number = 19, ids = {0, 0}},
+    {name = "Victor Hotel", number = 20, ids = {0, 0}}
 }
+
 
 local rankPlayers = game:GetService("Players")
 local rankRunService = game:GetService("RunService")
