@@ -109,7 +109,7 @@ local newcclosure = newcclosure
 local checkcaller = checkcaller
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
-local version = "K9G"
+local version = "K9H"
 local lower = string.lower
 local gsub = string.gsub
 local match = string.match
@@ -1132,8 +1132,9 @@ game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
 
 end)
 
-local isHolding = false
-local holdDelay = 0.5 -- half a second delay between value changes
+local holdPlus = false
+local holdMine = false
+local holdDelay = 0.5 -- 0.5 second delay between changes
 
 local function updateSpeed(change)
 	if change > 0 or speeds > 1 then
@@ -1162,23 +1163,41 @@ local function updateSpeed(change)
 	end
 end
 
-local function handleHold(button, change)
-	button.MouseButton1Down:Connect(function()
-		isHolding = true
-		updateSpeed(change) -- immediate change on click
+-- Plus button logic
+plus.MouseButton1Down:Connect(function()
+	if holdPlus then return end
+	holdPlus = true
+	updateSpeed(1)
+	task.spawn(function()
 		wait(holdDelay)
-		while isHolding do
-			updateSpeed(change)
+		while holdPlus do
+			updateSpeed(1)
 			wait(holdDelay)
 		end
 	end)
-	button.MouseButton1Up:Connect(function()
-		isHolding = false
-	end)
-end
+end)
 
-handleHold(plus, 1)
-handleHold(mine, -1)
+plus.MouseButton1Up:Connect(function()
+	holdPlus = false
+end)
+
+-- Mine button logic
+mine.MouseButton1Down:Connect(function()
+	if holdMine then return end
+	holdMine = true
+	updateSpeed(-1)
+	task.spawn(function()
+		wait(holdDelay)
+		while holdMine do
+			updateSpeed(-1)
+			wait(holdDelay)
+		end
+	end)
+end)
+
+mine.MouseButton1Up:Connect(function()
+	holdMine = false
+end)
 
 local Noclipping = nil
 local Clip = true
