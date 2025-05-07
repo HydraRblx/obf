@@ -109,7 +109,7 @@ local newcclosure = newcclosure
 local checkcaller = checkcaller
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
-local version = "K9H"
+local version = "L1A"
 local lower = string.lower
 local gsub = string.gsub
 local match = string.match
@@ -1132,9 +1132,14 @@ game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
 
 end)
 
+local lastClickTimePlus = 0
+local lastClickTimeMine = 0
 local holdPlus = false
 local holdMine = false
-local holdDelay = 0.5 -- 0.5 second delay between changes
+
+local manualCooldown = 0.6 -- seconds
+local holdInterval = 0.4   -- seconds
+local holdStartDelay = 0.3 -- how long to hold before auto-repeat
 
 local function updateSpeed(change)
 	if change > 0 or speeds > 1 then
@@ -1163,16 +1168,18 @@ local function updateSpeed(change)
 	end
 end
 
--- Plus button logic
+-- PLUS Button
 plus.MouseButton1Down:Connect(function()
-	if holdPlus then return end
+	local now = tick()
+	if now - lastClickTimePlus >= manualCooldown then
+		updateSpeed(1)
+		lastClickTimePlus = now
+	end
 	holdPlus = true
-	updateSpeed(1)
-	task.spawn(function()
-		wait(holdDelay)
+	task.delay(holdStartDelay, function()
 		while holdPlus do
 			updateSpeed(1)
-			wait(holdDelay)
+			wait(holdInterval)
 		end
 	end)
 end)
@@ -1181,16 +1188,18 @@ plus.MouseButton1Up:Connect(function()
 	holdPlus = false
 end)
 
--- Mine button logic
+-- MINE Button
 mine.MouseButton1Down:Connect(function()
-	if holdMine then return end
+	local now = tick()
+	if now - lastClickTimeMine >= manualCooldown then
+		updateSpeed(-1)
+		lastClickTimeMine = now
+	end
 	holdMine = true
-	updateSpeed(-1)
-	task.spawn(function()
-		wait(holdDelay)
+	task.delay(holdStartDelay, function()
 		while holdMine do
 			updateSpeed(-1)
-			wait(holdDelay)
+			wait(holdInterval)
 		end
 	end)
 end)
