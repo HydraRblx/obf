@@ -109,7 +109,7 @@ local newcclosure = newcclosure
 local checkcaller = checkcaller
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
-local version = "L1A"
+local version = "L1B"
 local lower = string.lower
 local gsub = string.gsub
 local match = string.match
@@ -1138,7 +1138,7 @@ local holdPlus = false
 local holdMine = false
 
 local manualCooldown = 0.6 -- seconds
-local holdInterval = 0.4   -- seconds
+local holdInterval = 0.3   -- seconds
 local holdStartDelay = 0.3 -- how long to hold before auto-repeat
 
 local function updateSpeed(change)
@@ -1171,10 +1171,12 @@ end
 -- PLUS Button
 plus.MouseButton1Down:Connect(function()
 	local now = tick()
+	-- Check for cooldown and prevent multiple presses
 	if now - lastClickTimePlus >= manualCooldown then
 		updateSpeed(1)
 		lastClickTimePlus = now
 	end
+
 	holdPlus = true
 	task.delay(holdStartDelay, function()
 		while holdPlus do
@@ -1191,14 +1193,28 @@ end)
 -- MINE Button
 mine.MouseButton1Down:Connect(function()
 	local now = tick()
+	-- Check for cooldown and prevent multiple presses
 	if now - lastClickTimeMine >= manualCooldown then
-		updateSpeed(-1)
-		lastClickTimeMine = now
+		if speeds > 1 then
+			updateSpeed(-1)
+			lastClickTimeMine = now
+		else
+			speed.Text = 'Cannot be less than 1 dumbass'
+			wait(1)
+			speed.Text = speeds
+		end
 	end
+
 	holdMine = true
 	task.delay(holdStartDelay, function()
 		while holdMine do
-			updateSpeed(-1)
+			if speeds > 1 then
+				updateSpeed(-1)
+			else
+				speed.Text = 'Cannot be less than 1 dumbass'
+				wait(1)
+				speed.Text = speeds
+			end
 			wait(holdInterval)
 		end
 	end)
