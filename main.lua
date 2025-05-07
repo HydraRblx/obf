@@ -109,7 +109,7 @@ local newcclosure = newcclosure
 local checkcaller = checkcaller
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
-local version = "K9F"
+local version = "K9G"
 local lower = string.lower
 local gsub = string.gsub
 local match = string.match
@@ -1133,7 +1133,7 @@ game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
 end)
 
 local isHolding = false
-local holdDelay = 0.5
+local holdDelay = 0.5 -- half a second delay between value changes
 
 local function updateSpeed(change)
 	if change > 0 or speeds > 1 then
@@ -1143,7 +1143,7 @@ local function updateSpeed(change)
 			tpwalking = false
 			for i = 1, speeds do
 				spawn(function()
-					local hb = game:GetService("RunService").Heartbeat	
+					local hb = game:GetService("RunService").Heartbeat
 					tpwalking = true
 					local chr = game.Players.LocalPlayer.Character
 					local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
@@ -1162,29 +1162,23 @@ local function updateSpeed(change)
 	end
 end
 
-plus.MouseButton1Down:Connect(function()
-	isHolding = true
-	while isHolding do
-		updateSpeed(1)
+local function handleHold(button, change)
+	button.MouseButton1Down:Connect(function()
+		isHolding = true
+		updateSpeed(change) -- immediate change on click
 		wait(holdDelay)
-	end
-end)
+		while isHolding do
+			updateSpeed(change)
+			wait(holdDelay)
+		end
+	end)
+	button.MouseButton1Up:Connect(function()
+		isHolding = false
+	end)
+end
 
-mine.MouseButton1Down:Connect(function()
-	isHolding = true
-	while isHolding do
-		updateSpeed(-1)
-		wait(holdDelay)
-	end
-end)
-
-plus.MouseButton1Up:Connect(function()
-	isHolding = false
-end)
-
-mine.MouseButton1Up:Connect(function()
-	isHolding = false
-end)
+handleHold(plus, 1)
+handleHold(mine, -1)
 
 local Noclipping = nil
 local Clip = true
